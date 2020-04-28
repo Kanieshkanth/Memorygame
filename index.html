@@ -1,0 +1,167 @@
+<!DOCTYPE HTML> 
+<html> 
+<head> 
+	<title> 
+		Inkoop Task
+	</title> 
+	<style> 
+		body { 
+			text-align: center; 
+            padding-top: 20px;
+		} 
+		h1 { 
+			color:  rgb(18, 154, 207); 
+		} 
+		#g { 
+			color:  rgb(18, 154, 207); 
+			font-size: 29px; 
+			font-weight: bold; 
+        } 
+        #show_button{
+            background: rgb(18, 154, 207);
+            border-radius: 5px;
+            border-color: rgb(80, 200, 255);
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: large;
+        }
+
+        #result{
+            color: rgb(12, 143, 204);
+            font-size: larger;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-weight: 200;
+        }
+	</style> 
+</head> 
+
+<body> 
+	<h1> 
+	Memory Game (Inkoop Task)
+    </h1>
+
+    <div id="first">
+        <p> 	
+        Click on the button to generate random 6 digit number 
+        </p> 
+        
+        <button onclick="gfg() , setTimeout(hs,5000);" id="show_button"> 
+            Click here 
+        </button> 
+        
+        <p id="g"> 
+
+        </p> 
+
+        Refreshing page in 5 secs 
+    </div>
+
+    <div id="second" style="display: none;">
+        <input type="text" id="num" maxlength="6" onkeypress="javascript:return isNumber(event)"><br/><br/>
+
+        <button id="show_button" onclick="fsfnc()">Submit</button>
+        
+        <a href="index.html">
+        <button id="show_button">Replay</button><br/></a>
+
+        <p id="result">
+
+        </p>
+    </div>
+
+	<script> 
+		var up = document.getElementById('GFG_UP'); 
+		var down = document.getElementById('g'); 
+
+        function hs(){
+            var x = document.getElementById("first");
+            var y = document.getElementById("second");
+
+            x.style.display = "none";
+            y.style.display = "block";
+        }
+
+        var button = document.getElementById('show_button')
+        button.addEventListener('click',hideshow,false);
+
+        function hideshow() {
+            this.style.display = 'none'
+        }   
+
+		function gfg() { 
+			var minm = 100000; 
+			var maxm = 999999; 
+            down.innerHTML = Math.floor(Math .random() * (maxm - minm + 1)) + minm;
+		} 
+
+        function fsfnc(){ 
+            var tb = document.getElementById("num").value;
+            var fn = document.getElementById("result");
+            console.log(tb);
+            if(tb.length == 6){
+                com();
+            }
+            else{
+                fn.innerHTML="Please enter 6 digit number";
+                console.log("Not");
+                document.getElementById("num").value = '';
+            }
+         }
+
+        function com(){
+            var a = document.getElementById("num").value;
+            var b = document.getElementById("g").textContent;
+            var fn = document.getElementById("result");
+
+            console.log(a);
+            console.log(b);
+
+            if(a==b){
+                fn.innerHTML="You are a Winner !";
+            }
+            else{
+            a1=[];
+            b1=[];
+            
+            for(var i=0, len=a.length;i<len;i+=1){
+              a1[i]=a%10; 
+              a=a/10; 
+              a1[i]=Math.trunc(a1[i]);
+            }
+
+            for(var i=0, len=b.length;i<len;i+=1){
+              b1[i]=b%10; 
+              b=b/10; 
+              b1[i]=Math.trunc(b1[i]);
+            }
+            console.log(a1);
+            console.log(b1);
+
+            var dig;
+            var a2 = a1.reverse();
+            var b2 = b1.reverse();
+
+            console.log(a2);
+            console.log(b2);
+
+            for(var i=0;i<6;i+=1){
+                if(b2[i]!=a2[i]){
+                  dig = i;
+                  console.log(dig);
+                  fn.innerHTML=dig+" digits success !";
+                  break;
+                }
+            }
+            }
+        }
+   
+        function isNumber(evt) {
+        var iKeyCode = (evt.which) ? evt.which : evt.keyCode
+        if (iKeyCode != 46 && iKeyCode > 31 && (iKeyCode < 48 || iKeyCode > 57))
+            return false;
+
+        return true;
+        } 
+	</script> 
+</body> 
+
+</html> 
